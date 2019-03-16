@@ -65,7 +65,7 @@ public class Authenticator {
     public Invocation.Builder setOAuthTokenForRequest(Invocation.Builder request){
         try {
             final AccessTokenResponse accessToken = keycloak.tokenManager().getAccessToken();
-            request.header(HttpHeaders.AUTHORIZATION, "Beare " + accessToken.getToken());
+            request.header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken.getToken());
             return request;
         }catch (NotAuthorizedException e){
             close();

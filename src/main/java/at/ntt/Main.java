@@ -53,14 +53,6 @@ public class Main {
             /**start implementing here**/
             //connection.setTargetOfClient(client, "URL").get();
             //connection.setTargetOfClient(client, "URL").post(Entity.entity(entityToSend), MediaType.APPLICATION_JSON);
-
-
-            git init
-            git add README.md
-            git commit -m "first commit"
-            git remote add origin git@github.com:Kixed/madmanswork.git
-            git push -u origin master
-
             String csoAccessibleByCurrentUser = "https://api-gateway-occ-int.imobility.azure.altemista.cloud/resources/business-partner/cso/accessible-by-current-user";
             final Response response = connection.setTargetOfClient(client, csoAccessibleByCurrentUser).get();
             //final Response response = request.post(Entity.entity(getDummySearchDTO(), MediaType.APPLICATION_JSON));
@@ -69,7 +61,7 @@ public class Main {
                 LOG.error("statuscode: " + response.getStatus());
                 LOG.error(response.getStatusInfo().getReasonPhrase());
             } else {
-                String csvFile = "/home/nico/text.csv";
+                String csvFile = "/home/martin/text.csv";
                 FileWriter writer = new FileWriter(csvFile);
                 CSVUtils.writeLine(writer, Arrays.asList("ID", "NAME", "OPERATOR_ID", "DISPLAY_NAME"), ';');
 
