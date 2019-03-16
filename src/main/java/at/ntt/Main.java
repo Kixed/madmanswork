@@ -21,31 +21,17 @@ public class Main {
 
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
 
-    private static final String SERVER_URL = "https://keycloak-occ-int.imobility.azure.altemista.cloud/auth";
-    private static final String REALM = "occ-int";
-    private static final String CLIENT_ID = "testextensions";
-    private static final String CLIENT_SECRET = "e30a2457-68ae-40de-8dfc-3be56cfe0eb9";
-    private static final String USERNAME = "testextension2";
-    private static final String PASSWORD = "testextension2";
+    private static final String SERVER_URL = "";
+    private static final String REALM = "";
+    private static final String CLIENT_ID = "";
+    private static final String CLIENT_SECRET = "";
+    private static final String USERNAME = "";
+    private static final String PASSWORD = "";
 
 
     public static void main(String args[]){
 
-        InputStreamReader isr = new InputStreamReader(System.in);
-        BufferedReader br = new BufferedReader(isr);
-
-        String username = null;
-        String password = null;
-        try {
-            System.out.print("User: ");
-            username = br.readLine();
-            System.out.print("Password: ");
-            password = br.readLine();
-        } catch (IOException e) {
-            LOG.error("Could not read user input", e);
-        }
-
-        Authenticator auth = new Authenticator(SERVER_URL, REALM, CLIENT_ID, CLIENT_SECRET, username, password);
+        Authenticator auth = new Authenticator(SERVER_URL, REALM, CLIENT_ID, CLIENT_SECRET, USERNAME, PASSWORD);
         ConnectionUtils connection = new ConnectionUtils(auth);
         ResteasyClient client = connection.getRestClient();
 
@@ -56,7 +42,7 @@ public class Main {
 
 
 
-            
+
         } finally {
 
             client.close();
