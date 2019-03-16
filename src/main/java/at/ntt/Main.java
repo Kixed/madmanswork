@@ -53,47 +53,10 @@ public class Main {
             /**start implementing here**/
             //connection.setTargetOfClient(client, "URL").get();
             //connection.setTargetOfClient(client, "URL").post(Entity.entity(entityToSend), MediaType.APPLICATION_JSON);
-            String csoAccessibleByCurrentUser = "https://api-gateway-occ-int.imobility.azure.altemista.cloud/resources/business-partner/cso/accessible-by-current-user";
-            final Response response = connection.setTargetOfClient(client, csoAccessibleByCurrentUser).get();
-            //final Response response = request.post(Entity.entity(getDummySearchDTO(), MediaType.APPLICATION_JSON));
 
-            if (response.getStatus() >= 400) {
-                LOG.error("statuscode: " + response.getStatus());
-                LOG.error(response.getStatusInfo().getReasonPhrase());
-            } else {
-                String csvFile = "/home/martin/text.csv";
-                FileWriter writer = new FileWriter(csvFile);
-                CSVUtils.writeLine(writer, Arrays.asList("ID", "NAME", "OPERATOR_ID", "DISPLAY_NAME"), ';');
 
-                ChargingStationOperatorDTO[] roamingMessageListDTO = response.readEntity(new GenericType<ChargingStationOperatorDTO[]>() {
-                });
 
-                LOG.info("" +roamingMessageListDTO.length);
-                Arrays.stream(roamingMessageListDTO).forEach(entry -> {
-                    try {
-                        CSVUtils.writeLine(writer, Arrays.asList(entry.getId().toString(), entry.getName(), entry.getOperatorId(), entry.getDisplayName()), ';');
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-                //SearchResultDTOMediaListDTO roamingMessageListDTO = response.readEntity(new GenericType<SearchResultDTOMediaListDTO>() {
-                //});
-                //final RoamingMessageDTO roamingMessageDTO = response.readEntity(new GenericType<RoamingMessageDTO>() {});
-                /*System.out.println(roamingMessageListDTO.getTotalCount());
-                roamingMessageListDTO.getResults().stream().forEach(o ->{
-                    try {
-                        CSVUtils.writeLine(writer, Arrays.asList(o.getCardNumber(), o.getCustomerNumber(), o.getDescription(), o.getIdTag(), o.getEmpId().toString(), o.getIdTag(), o.getVersionedData().getId().toString(), o.getVersionedData().getVersion().toString()), ';');
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                });
-                */writer.flush();
-                writer.close();
-            }
-        } catch (IOException e) {
-            System.err.println("could not create csv file");
-            System.err.println(e.getStackTrace());
+            
         } finally {
 
             client.close();
